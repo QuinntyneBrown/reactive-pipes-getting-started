@@ -3,6 +3,8 @@ using reactive.pipes.Producers;
 using System.Reactive.Linq;
 using System.Threading;
 using System;
+using System.Threading.Tasks;
+
 namespace ReactivePipesGettingStarted
 {
     class Program
@@ -11,8 +13,8 @@ namespace ReactivePipesGettingStarted
         {
             var block = new ManualResetEvent(false);
             var producer = new ObservingProducer<int>();
-            var consumer = new DelegatingConsumer<int>();
-
+            var consumer = new DelegatingConsumer<int>( i => { Console.WriteLine($"{i}"); });
+            
             producer.Produces(Observable.Range(1, 10000), onCompleted: () => block.Set());
             producer.Attach(consumer);
             producer.Start();

@@ -6,11 +6,15 @@ namespace ReactivePipesGettingStarted
 {
     class DelegatingConsumer<T> : IConsume<T>
     {
-        public DelegatingConsumer() { }
+        private Action<T> _action;
+        
+        public DelegatingConsumer(Action<T> action) {
+            _action = action;
+        }
 
         public Task<bool> HandleAsync(T message)
         {
-            Console.WriteLine($"{message}");
+            _action(message);
             return Task.FromResult(true);
         }
     }
