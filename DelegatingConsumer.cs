@@ -4,17 +4,17 @@ using System.Threading.Tasks;
 
 namespace ReactivePipesGettingStarted
 {
-    class DelegatingConsumer<T> : IConsume<T>
+    public class DelegatingConsumer<T> : IConsume<T>
     {
-        private Action<T> _action;
-        
-        public DelegatingConsumer(Action<T> action) {
-            _action = action;
+        private Action<T> _delegate;
+
+        public DelegatingConsumer(Action<T> @delgate) {
+            _delegate = @delgate;
         }
 
         public Task<bool> HandleAsync(T message)
         {
-            _action(message);
+            _delegate(message);
             return Task.FromResult(true);
         }
     }

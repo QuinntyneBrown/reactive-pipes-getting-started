@@ -4,6 +4,7 @@ using System.Reactive.Linq;
 using System.Threading;
 using System;
 using System.Threading.Tasks;
+using reactive.pipes.Consumers;
 
 namespace ReactivePipesGettingStarted
 {
